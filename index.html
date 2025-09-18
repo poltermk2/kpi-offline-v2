@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KPI-OFFLINE</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="lang">
+      <label data-i18n="language"></label>
+      <select id="cboLang"></select>
+    </div>
+    <img id="logo" src="./src/logo.png" alt="logo" />
+  </header>
+
+  <!-- ECRÃ 1: OVERVIEW -->
+  <section id="screenOverview">
+    <div class="row">
+      <label data-i18n="line"></label>
+      <select id="cboLine"></select>
+    </div>
+    <div class="row">
+      <label data-i18n="prod_order"></label>
+      <input id="txtPO" type="text"/>
+    </div>
+    <div class="row">
+      <label data-i18n="date_label"></label>
+      <input id="txtDate" type="text" placeholder="dd/mm/aaaa"/>
+    </div>
+    <div class="row">
+      <label data-i18n="berry"></label>
+      <select id="cboBerry"></select>
+    </div>
+    <div class="row">
+      <label data-i18n="origin"></label>
+      <select id="cboOrigin"></select>
+    </div>
+    <div class="row">
+      <label data-i18n="packtype"></label>
+      <select id="cboPack"></select>
+    </div>
+    <div class="row">
+      <label data-i18n="start_time"></label>
+      <input id="txtStart" type="text" placeholder="hh:mm"/>
+    </div>
+    <div class="row">
+      <label data-i18n="punnets_infeed"></label>
+      <input id="txtInfeed" inputmode="numeric"/>
+    </div>
+    <div class="row">
+      <label data-i18n="operators"></label>
+      <input id="txtOps" inputmode="numeric"/>
+    </div>
+    <div class="row">
+      <label data-i18n="team_leaders"></label>
+      <input id="txtTLs" inputmode="numeric"/>
+    </div>
+    <div class="btns">
+      <button id="btnOverviewRegister"></button>
+      <button id="btnOverviewClose"></button>
+      <button id="btnExport">Exportar CSV</button>
+    </div>
+  </section>
+
+  <!-- ECRÃ 2: DOWNTIME -->
+  <section id="screenDowntime" class="hidden">
+    <h3 id="dtTitle"></h3>
+    <div id="dtHeaderPO" class="po-hdr"></div>
+    <div class="row">
+      <label data-i18n="reason_code"></label>
+      <input id="cboDTCode" list="lstCodes" placeholder="Descrição [CÓDIGO]"/>
+      <datalist id="lstCodes"></datalist>
+    </div>
+    <div class="row">
+      <label data-i18n="time_min"></label>
+      <input id="txtDTMin" inputmode="decimal"/>
+    </div>
+    <div class="btns">
+      <button id="btnDTRegister"></button>
+      <button id="btnDTNext"></button>
+      <button id="btnDTBack"></button>
+    </div>
+  </section>
+
+  <!-- ECRÃ 3: OUTPUT -->
+  <section id="screenOutput" class="hidden">
+    <h3 id="outTitle"></h3>
+    <div id="outHeaderPO" class="po-hdr"></div>
+    <div class="row"><label data-i18n="stop_time"></label><input id="txtStop" type="text" placeholder="hh:mm"/></div>
+    <div class="row"><label data-i18n="lbl_punnets_outfeed"></label><input id="txtProduced" inputmode="numeric"/></div>
+    <div class="row"><label data-i18n="lbl_weight_ok"></label><input id="txtOK" inputmode="numeric"/></div>
+    <div class="row"><label data-i18n="lbl_underweight"></label><input id="txtTU2" inputmode="numeric"/></div>
+    <div class="row"><label data-i18n="lbl_avg_weight"></label><input id="txtAvgW" inputmode="decimal"/></div>
+    <div class="btns">
+      <button id="btnOutSave"></button>
+      <button id="btnOutCancel"></button>
+    </div>
+  </section>
+
+  <script src="./src/i18n.js"></script>
+  <script src="./src/config.js"></script>
+  <script src="./src/graph.js"></script>
+  <script src="./src/excelSync.js"></script>
+  <script src="./src/sync.js"></script>
+  <script src="./src/dialogs.js"></script>
+  <script src="./src/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./src/service-worker.js');
+    }
+  </script>
+</body>
+</html>
